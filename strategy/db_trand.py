@@ -3,7 +3,6 @@
 import pandas as pd 
 import talib as ta
 import numpy as np
-from quantify.core import take_back
 from quantify import db,dataApi 
 import mysql.connector
 
@@ -16,7 +15,7 @@ import mysql.connector
 conn=mysql.connector.connect(user='root',password='',database='quant')
 #cursor=conn.cursor()
 #cursor.execute('select * from daily_data where secID=%s',['300482.XSHE'])
-sql="SELECT * FROM daily_data WHERE secID = '300487.XSHE'"
+sql="SELECT * FROM daily_data"
 res=pd.read_sql(sql, conn, index_col='data_id')
 print res.iloc[0]['secID'].decode('utf-8')
 #values=cursor.fetchall()

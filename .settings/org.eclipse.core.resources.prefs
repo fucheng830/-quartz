@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+encoding//quantify/core.py=utf-8
+encoding//quantify/dataApi.py=utf-8
+encoding//quantify/db.py=utf-8
+encoding//quantify/download.py=utf-8
+encoding//quantify/lock.py=utf-8
+encoding//quantify/mock_tranding.py=utf-8
+encoding//quantify/thread_pool.py=utf-8
+encoding//quantify/updata.py=utf-8
+encoding//strategy/ADX.py=utf-8
+encoding//strategy/RSI_tranding.py=utf-8
+encoding//strategy/db_trand.py=utf-8
+encoding//strategy/listen_stocket.py=utf-8
+encoding//strategy/test_tack_back.py=utf-8
