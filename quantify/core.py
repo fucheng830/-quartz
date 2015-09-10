@@ -8,6 +8,8 @@ import glob
 import os
 import time
 import lock
+from pylab import *
+
 from multiprocessing import Process
 
 class account(object):
@@ -51,6 +53,7 @@ class StrategyBase(object):
         self.value_hist =[] #资产记录
         self.return_hist =[] #回报记录
         self.return_view =pd.DataFrame()
+        self.botter_list= [] #交易记录
         self.__init__ =self.init()
         
         
@@ -135,7 +138,9 @@ class StrategyBase(object):
              
               }
         self.return_view=pd.DataFrame(data,index=data['time'])
-       
+        self.return_view['return_back'].plot()
+        show()
+    
         
     
     def day_record(self):
@@ -186,9 +191,11 @@ class StrategyBase(object):
                     self.account.secpos[aymbol]+=volum
                 else:
                     self.account.secpos[aymbol]=volum
-                self.botter=['behaviour:buy','secID:%s'%aymbol,'secShortName:%s'%self.tempdata.iloc[0]['secShortName'],'tradeDate:%s'%self.account.current_date,'price:%f'%price,'volum:%d'%volum,'cost_money:%f'%order_money]
-                return 1
+                self.botter=[aymbol,self.tempdata.iloc[0]['secShortName'],'buy',self.account.current_date,price,volum,order_money]
+                self.botter_list.append(self.botter)
+                return self.botter
             else :
+                print "botter_error:no enough cash!"
                 return 0
         elif amount<0 and price>0:
             #卖出
@@ -197,15 +204,18 @@ class StrategyBase(object):
             if aymbol in  self.account.secpos and self.account.secpos[aymbol]>=volum :
                 self.account.cash+=order_money
                 self.account.secpos[aymbol]-=volum
-                self.botter=['behaviour:sell','secID:%s'%aymbol,'secShortName:%s'%self.tempdata.iloc[0]['secShortName'],'tradeDate:%s'%self.account.current_date,'price:%f'%price,'volum:%d'%volum,'cost_money:%f'%order_money]
-                return 1
+                self.botter=[aymbol,self.tempdata.iloc[0]['secShortName'],'sell',self.account.current_date,price,volum,order_money]
+                self.botter_list.append(self.botter)
+                return self.botter
             else:
                 print "botter_error:no enough stock!"
                 return 0
         else:
-            pass
+            pass 
             
-            
+    def get_botter_list(self):
+        botter_list=pd.DataFrame(self.botter_list,columns=[u'证券代码',u'证券名称',u'买/卖',u'时间',u'成交价格',u'交易数量',u'交易金额'])
+        return botter_list
     
     def order_to(self,symbol,amount):
         pass

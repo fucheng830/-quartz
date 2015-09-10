@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from quantify.core import StrategyBase
-from pylab import *
 import pandas as pd
+from pylab import *
 
 class mystrategy(StrategyBase):
     
@@ -34,6 +34,7 @@ if __name__ == '__main__':
     #print my.hist_range.shape[0]
    
     my.run()
+    print my.get_botter_list()
     #my.return_view['return_back'].plot()
     #show()
     
