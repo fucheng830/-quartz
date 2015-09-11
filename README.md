@@ -1,23 +1,40 @@
 # -quartz
 量化回测框架
-
-
 例程：
-# -*- coding: utf-8 -*-
-from quantify.core import StrategyBase   #核心类库引用
-import pandas as pd    #引入pandas 
-from pylab import *  #如果需要可视化结果 需要引入pylab库
 
-#继承策略类
+from quantify.core import StrategyBase  
+import pandas as pd     
+from pylab import *  
+核心类库引用
+引入pandas
+如果需要可视化结果 需要引入pylab库
+
+继承策略类
+
 class mystrategy(StrategyBase):
+
     #重写策略主函数  默认每个交易日调用一次
+    
     def handle_data(self):
+    
         #实现策略代码 
+        
         data=pd.DataFrame()
-        last_data=self.get_last_data()  #调用get_last_data()方法可以获得当前回测日期的历史数据 数据长度由参数定义
-        ls=last_data[last_data['secID']=='600006.XSHG']  #get_last_Data()返回的是历史数据的pandas数据格式 
-        m1=np.array(pd.rolling_mean(ls['closePrice'],5)) #计算5日均线
-        m2=np.array(pd.rolling_mean(ls['closePrice'],15)) #计算10日均线
+        last_data=self.get_last_data() 
+        
+        #调用get_last_data()方法可以获得当前回测日期的历史数据 数据长度由参数定义
+        
+        ls=last_data[last_data['secID']=='600006.XSHG']  
+        
+        #get_last_Data()返回的是历史数据的pandas数据格式 
+        
+        m1=np.array(pd.rolling_mean(ls['closePrice'],5)) 
+        
+        #计算5日均线
+        
+        m2=np.array(pd.rolling_mean(ls['closePrice'],15)) 
+        
+        #计算10日均线
         
   
 
