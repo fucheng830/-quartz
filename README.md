@@ -1,7 +1,7 @@
 # -quartz
 量化回测框架
 例程：
-
+```
 from quantify.core import StrategyBase  
 import pandas as pd     
 from pylab import *  
@@ -61,6 +61,5 @@ if __name__ == '__main__':
     #capital_base 初始金额
     #commission 交易手续费
     #slippage 滑点
-
-   
+```
     
